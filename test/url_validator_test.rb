@@ -7,13 +7,15 @@ class URLValidatorTest < ActiveSupport::TestCase
   include StubModuleFunction
 
   setup do
+    validator = HrefSanitizer::UrlValidator
+
     @model_class = Class.new do
       include ActiveModel::Model
       include ActiveModel::Validations
 
       attr_accessor :website
 
-      validates :website, url: { no_local: true }, allow_blank: true
+      validates_with validator, attributes: [:website], no_local: true, allow_blank: true
 
       def self.name = "TestModel"
     end
@@ -24,7 +26,7 @@ class URLValidatorTest < ActiveSupport::TestCase
 
       attr_accessor :lien_dpo
 
-      validates :lien_dpo, url: { no_local: true, accept_email: true }, allow_blank: true
+      validates_with validator, attributes: [:lien_dpo], no_local: true, accept_email: true, allow_blank: true
 
       def self.name = "EmailModel"
     end

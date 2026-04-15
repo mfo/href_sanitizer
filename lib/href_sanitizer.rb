@@ -3,7 +3,6 @@
 require "href_sanitizer/version"
 require "href_sanitizer/url_sanitizer"
 require "href_sanitizer/url_validator"
-require "href_sanitizer/safe_url_validator"
 require "href_sanitizer/railtie" if defined?(Rails::Railtie)
 
 module HrefSanitizer
